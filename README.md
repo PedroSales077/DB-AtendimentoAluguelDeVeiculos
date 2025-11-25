@@ -116,7 +116,7 @@ Este projeto não é apenas um banco de dados — ele é um sistema completo de 
 Tudo foi construído com foco em claridade, confiabilidade e precisão histórica, garantindo que qualquer aplicação conectada a ele tenha uma base sólida para operar.
 
 
-/*-------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*---------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 🚀 Como utilizar este banco de dados (AutoDrive)
