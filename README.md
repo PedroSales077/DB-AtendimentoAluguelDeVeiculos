@@ -114,3 +114,117 @@ Histórico de Utilização
 
 Este projeto não é apenas um banco de dados — ele é um sistema completo de rastreamento operacional para locadoras de veículos.
 Tudo foi construído com foco em claridade, confiabilidade e precisão histórica, garantindo que qualquer aplicação conectada a ele tenha uma base sólida para operar.
+
+
+🚀 Como utilizar este banco de dados (AutoDrive)
+
+Para executar este projeto e criar todo o banco AutoDrive, siga os passos abaixo dentro do seu ambiente MySQL (Workbench, DBeaver, Beekeeper, Terminal ou similar):
+
+1️⃣ Criar e selecionar o banco de dados
+
+O primeiro passo é criar o banco e defini-lo como o banco ativo para receber as tabelas:
+
+CREATE DATABASE autoDrive;
+USE autoDrive;
+
+2️⃣ Criar as tabelas do sistema
+
+O projeto inclui tabelas que representam todas as operações da locadora — clientes, veículos, reservas, empréstimos, devoluções, manutenções e histórico de utilização.
+
+Cada CREATE TABLE deve ser executado exatamente na ordem em que aparece no arquivo, porque algumas tabelas possuem chaves estrangeiras dependentes de outras.
+
+Exemplo de criação de tabela:
+
+CREATE TABLE cliente (
+    idCliente INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(45) NOT NULL,
+    cpf CHAR(11) NOT NULL,
+    telefone INT NOT NULL,
+    ddd INT NOT NULL,
+    email VARCHAR(100),
+    data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+
+Após criar todas as tabelas, você terá a estrutura completa do sistema AutoDrive.
+
+3️⃣ Inserir dados iniciais
+
+O script fornece dados prontos para testes, incluindo:
+
+7 clientes
+
+10 veículos
+
+Reservas com diferentes status
+
+Empréstimos
+
+Devoluções
+
+Manutenções
+
+Histórico de utilização
+
+Basta executar os blocos de INSERT fornecidos:
+
+INSERT INTO cliente (nome, cpf, ddd, telefone, email, data_cadastro) VALUES
+('Ana Silva', '12345678901', '11', '987654321', 'ana.silva@example.com', '2025-11-23'),
+...
+
+
+Com isso, o banco já estará populado para testes, consultas e operações.
+
+4️⃣ Executar consultas prontas (queries)
+
+O arquivo também inclui consultas SQL úteis, como:
+
+Listar reservas confirmadas
+
+Ver veículos com quilometragem alta
+
+Consultar histórico completo de utilização
+
+Ver devoluções com danos
+
+Atualizar quilometragem após devolução
+
+Atualizar status de reserva
+
+Exemplo:
+
+SELECT * FROM reserva
+WHERE status_reserva = 'confirmada'
+ORDER BY data_prevista_retirada ASC;
+
+
+Essas queries demonstram como interagir com o banco e podem ser reutilizadas no sistema final.
+
+5️⃣ Executar comandos de atualização (UPDATE)
+
+O script já traz exemplos reais de atualização de dados:
+
+UPDATE veiculo
+SET quilometragem_atual = 45210
+WHERE idVeiculo = 1;
+
+6️⃣ Executar deletes seguros
+
+Todos os DELETE do arquivo usam chaves primárias, garantindo compatibilidade com o Safe Update Mode:
+
+DELETE FROM cliente
+WHERE idCliente = 7;
+
+✔ Pronto!
+
+Após seguir esses passos, você terá o banco AutoDrive completo, funcional e populado, pronto para:
+
+Testes
+
+Desenvolvimento backend
+
+Projetos acadêmicos
+
+Relatórios
+
+Estudos de modelagem SQL
