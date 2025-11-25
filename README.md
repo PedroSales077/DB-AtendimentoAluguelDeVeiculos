@@ -116,6 +116,9 @@ Este projeto não é apenas um banco de dados — ele é um sistema completo de 
 Tudo foi construído com foco em claridade, confiabilidade e precisão histórica, garantindo que qualquer aplicação conectada a ele tenha uma base sólida para operar.
 
 
+
+
+
 🚀 Como utilizar este banco de dados (AutoDrive)
 
 Para executar este projeto e criar todo o banco AutoDrive, siga os passos abaixo dentro do seu ambiente MySQL (Workbench, DBeaver, Beekeeper, Terminal ou similar):
