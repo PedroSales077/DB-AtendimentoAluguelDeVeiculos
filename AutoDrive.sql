@@ -142,3 +142,82 @@ select * from reserva;
 select * from emprestimo;
 select * from devolucao;
 select * from historico_utilizacao;
+
+-- Lista todas as reservas confirmadas, ordenadas pela data prevista de retirada
+select * from reserva
+where status_reserva = 'confirmada'
+order by data_prevista_retirada asc;
+
+-- Lista os veículos com quilometragem acima de 50.000 km
+select idVeiculo, modelo, marca, quilometragem_atual
+from veiculo
+where quilometragem_atual > 50000
+order by quilometragem_atual desc;
+
+-- Mostra o histórico de utilização junto com o nome do cliente e modelo do veículo 
+select c.nome as cliente,
+       v.modelo as veiculo,
+       h.tipo_registro,
+       h.data_inicio,
+       h.data_fim
+from historico_utilizacao h
+join cliente c on h.fkCliente = c.idCliente
+join veiculo v on h.fkVeiculo = v.idVeiculo
+order by h.data_inicio desc;
+
+-- lista as devoluções onde houve danos
+select d.idDevolucao, d.data_devolucao, d.observacao, d.valor_adicional, e.fkReserva
+from devolucao d
+join emprestimo e on d.fkEmprestimo = e.idEmprestimo
+where danos_identificados = 'Sim';
+
+-- Mostra somente 3 veículos mais novos
+select * from veiculo
+order by ano desc
+limit 3;
+
+-- Lista empréstimos com informações do cliente e do veículo
+select c.nome as cliente,
+       v.modelo as veiculo,
+       e.data_retirada,
+       e.quilometragem_atual
+from emprestimo e
+join reserva r on e.fkReserva = r.idReserva
+join cliente c on r.fkCliente = c.idCliente
+join veiculo v on r.fkVeiculo = v.idVeiculo;
+
+-- Mostra todas as manutenções feitas no veículo Renegade
+select m.*, 
+       v.modelo, 
+       v.marca
+from manutencao m
+join veiculo v on m.fkVeiculo = v.idVeiculo
+where v.modelo = 'Renegade';
+
+-- Atualiza o status de uma reserva pendente para confirmada
+update reserva
+set status_reserva = 'confirmada'
+where idReserva = 2;
+
+-- Atualiza quilometragem do veículo após devolução
+update veiculo
+set quilometragem_atual = 45210
+where idVeiculo = 1;
+
+-- Atualiza o valor adicional de uma devolução por erro de registro
+update devolucao
+set valor_adicional = 150.00
+where idDevolucao = 2;
+
+-- Excluir o veiculo que está na mantenção com idManuntecao 1
+delete from manutencao
+where idManutencao = 1;
+
+-- Excluir o cliente que corresponde idCliente 7
+delete from cliente
+where idCliente = 7;
+
+-- Excluir registros de histórico de teste referentes a um cliente
+delete from historico_utilizacao
+where fkCliente = 6
+and tipo_registro = 'emprestimo';
